@@ -61,24 +61,19 @@ export default function BinaryCard({ value, isFlipped, onFlip }: BinaryCardProps
       </p>
       
       <div 
-        className="relative w-16 h-20 sm:w-20 sm:h-28 md:w-24 md:h-32 cursor-pointer perspective-1000"
+        className="w-16 h-20 sm:w-20 sm:h-28 md:w-24 md:h-32 cursor-pointer transition-all duration-300"
         onClick={onFlip}
       >
-        <div 
-          className={cn(
-            "w-full h-full relative transition-transform duration-300 transform-style-preserve-3d",
-            isFlipped && "rotate-y-180"
-          )}
-        >
-          {/* Front Face (Face Down - Blank) */}
-          <div className="absolute inset-0 backface-hidden bg-gray-400 border-2 border-gray-500 rounded-lg hover:bg-gray-500 transition-colors">
-          </div>
-          
-          {/* Back Face (Face Up - With Dots) */}
-          <div className="absolute inset-0 backface-hidden rotate-y-180 bg-white border-2 border-blue-600 rounded-lg">
+        {isFlipped ? (
+          /* Face Up - With Dots */
+          <div className="w-full h-full bg-white border-2 border-blue-600 rounded-lg hover:border-blue-700 transition-colors">
             {getDotPattern(value)}
           </div>
-        </div>
+        ) : (
+          /* Face Down - Dark/Blank */
+          <div className="w-full h-full bg-gray-500 border-2 border-gray-600 rounded-lg hover:bg-gray-600 transition-colors">
+          </div>
+        )}
       </div>
       
       <p className="text-xs text-gray-500 mt-2">
