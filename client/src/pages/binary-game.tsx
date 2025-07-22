@@ -94,7 +94,7 @@ export default function BinaryGame() {
   };
 
   const getMiniDotPattern = (value: number) => {
-    const dotSize = "w-1 h-1 bg-gray-800 rounded-full";
+    const dotSize = "w-1.5 h-1.5 bg-gray-800 rounded-full";
     
     switch (value) {
       case 8:
@@ -278,11 +278,11 @@ export default function BinaryGame() {
             <h4 className="font-semibold text-green-800 mb-2">Solution:</h4>
             
             {/* Miniature Cards Visual */}
-            <div className="flex justify-center gap-3 mb-4">
+            <div className="flex justify-center gap-4 mb-4">
               {[8, 4, 2, 1].map((value) => (
                 <div key={value} className="text-center">
                   <div 
-                    className={`w-12 h-16 rounded border-2 flex items-center justify-center transition-colors ${
+                    className={`w-16 h-20 rounded border-2 flex items-center justify-center transition-colors ${
                       gameState.cards[value] 
                         ? 'bg-white border-blue-600' 
                         : 'bg-gray-400 border-gray-500'
@@ -290,7 +290,7 @@ export default function BinaryGame() {
                   >
                     {gameState.cards[value] && getMiniDotPattern(value)}
                   </div>
-                  <div className="text-sm text-green-700 mt-1">{value}</div>
+                  <div className="text-sm text-green-700 mt-2">{value}</div>
                 </div>
               ))}
             </div>
