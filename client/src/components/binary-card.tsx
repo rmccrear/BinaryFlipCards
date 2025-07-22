@@ -10,32 +10,32 @@ const getDotPattern = (value: number) => {
   switch (value) {
     case 8:
       return (
-        <div className="grid grid-cols-3 gap-1 h-full items-center justify-items-center p-2">
+        <div className="grid grid-cols-3 gap-1 h-full items-center justify-items-center p-1 sm:p-2">
           {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="w-3 h-3 bg-gray-800 rounded-full"></div>
+            <div key={i} className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
           ))}
         </div>
       );
     case 4:
       return (
-        <div className="grid grid-cols-2 gap-2 h-full items-center justify-items-center p-3">
+        <div className="grid grid-cols-2 gap-1 sm:gap-2 h-full items-center justify-items-center p-1 sm:p-2 md:p-3">
           {Array.from({ length: 4 }).map((_, i) => (
-            <div key={i} className="w-3 h-3 bg-gray-800 rounded-full"></div>
+            <div key={i} className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
           ))}
         </div>
       );
     case 2:
       return (
-        <div className="flex flex-col gap-4 h-full items-center justify-center p-4">
+        <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 h-full items-center justify-center p-2 sm:p-3 md:p-4">
           {Array.from({ length: 2 }).map((_, i) => (
-            <div key={i} className="w-3 h-3 bg-gray-800 rounded-full"></div>
+            <div key={i} className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
           ))}
         </div>
       );
     case 1:
       return (
         <div className="flex items-center justify-center h-full">
-          <div className="w-3 h-3 bg-gray-800 rounded-full"></div>
+          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
         </div>
       );
     default:
@@ -61,7 +61,7 @@ export default function BinaryCard({ value, isFlipped, onFlip }: BinaryCardProps
       </p>
       
       <div 
-        className="relative w-24 h-32 cursor-pointer perspective-1000"
+        className="relative w-16 h-20 sm:w-20 sm:h-28 md:w-24 md:h-32 cursor-pointer perspective-1000"
         onClick={onFlip}
       >
         <div 
