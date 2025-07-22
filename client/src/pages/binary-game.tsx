@@ -133,19 +133,6 @@ export default function BinaryGame() {
           </p>
         </div>
 
-        {/* Game Controls */}
-        <GameControls
-          difficulty={gameState.difficulty}
-          targetNumber={gameState.targetNumber}
-          currentTotal={currentTotal}
-          feedbackMessage={feedbackMessage}
-          feedbackType={feedbackType}
-          showFeedback={showFeedback}
-          onDifficultyChange={(difficulty) => setGameState(prev => ({ ...prev, difficulty }))}
-          onNewTarget={generateNewTarget}
-          onReset={resetCards}
-        />
-
         {/* Binary Cards Section */}
         <Card className="mb-8">
           <CardContent className="p-8">
@@ -210,6 +197,19 @@ export default function BinaryGame() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Game Controls */}
+        <GameControls
+          difficulty={gameState.difficulty}
+          targetNumber={gameState.targetNumber}
+          currentTotal={currentTotal}
+          feedbackMessage={feedbackMessage}
+          feedbackType={feedbackType}
+          showFeedback={showFeedback}
+          onDifficultyChange={(difficulty) => setGameState(prev => ({ ...prev, difficulty }))}
+          onNewTarget={generateNewTarget}
+          onReset={resetCards}
+        />
 
         {/* Learning Section */}
         <LearningInfo />
