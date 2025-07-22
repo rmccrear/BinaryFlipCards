@@ -93,6 +93,52 @@ export default function BinaryGame() {
     generateNewTarget();
   };
 
+  const getMiniDotPattern = (value: number) => {
+    const dotSize = "w-0.5 h-0.5 bg-gray-800 rounded-full";
+    
+    switch (value) {
+      case 8:
+        return (
+          <div className="flex flex-col gap-0.5 items-center">
+            <div className="flex gap-0.5">
+              <div className={dotSize}></div>
+              <div className={dotSize}></div>
+              <div className={dotSize}></div>
+            </div>
+            <div className="flex gap-0.5">
+              <div className={dotSize}></div>
+              <div className={dotSize}></div>
+            </div>
+            <div className="flex gap-0.5">
+              <div className={dotSize}></div>
+              <div className={dotSize}></div>
+              <div className={dotSize}></div>
+            </div>
+          </div>
+        );
+      case 4:
+        return (
+          <div className="grid grid-cols-2 gap-0.5">
+            <div className={dotSize}></div>
+            <div className={dotSize}></div>
+            <div className={dotSize}></div>
+            <div className={dotSize}></div>
+          </div>
+        );
+      case 2:
+        return (
+          <div className="flex flex-col gap-1 items-center">
+            <div className={dotSize}></div>
+            <div className={dotSize}></div>
+          </div>
+        );
+      case 1:
+        return <div className={dotSize}></div>;
+      default:
+        return null;
+    }
+  };
+
   const getBinaryExplanation = (): string => {
     const activeCards = Object.entries(gameState.cards)
       .filter(([_, isUp]) => isUp)
@@ -236,13 +282,13 @@ export default function BinaryGame() {
               {[8, 4, 2, 1].map((value) => (
                 <div key={value} className="text-center">
                   <div 
-                    className={`w-8 h-10 rounded border-2 flex items-center justify-center text-xs font-bold transition-colors ${
+                    className={`w-8 h-10 rounded border-2 flex items-center justify-center transition-colors ${
                       gameState.cards[value] 
-                        ? 'bg-white border-blue-600 text-blue-600' 
-                        : 'bg-gray-400 border-gray-500 text-gray-600'
+                        ? 'bg-white border-blue-600' 
+                        : 'bg-gray-400 border-gray-500'
                     }`}
                   >
-                    {gameState.cards[value] ? value : ''}
+                    {gameState.cards[value] && getMiniDotPattern(value)}
                   </div>
                   <div className="text-xs text-green-700 mt-1">{value}</div>
                 </div>
