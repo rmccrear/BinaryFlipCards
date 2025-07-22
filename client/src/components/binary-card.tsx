@@ -10,10 +10,24 @@ const getDotPattern = (value: number) => {
   switch (value) {
     case 8:
       return (
-        <div className="grid grid-cols-3 gap-1 h-full items-center justify-items-center p-1 sm:p-2">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
-          ))}
+        <div className="flex flex-col h-full justify-center items-center gap-1 sm:gap-2 p-1 sm:p-2">
+          {/* Top row - 3 dots */}
+          <div className="flex gap-1 sm:gap-2">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
+          </div>
+          {/* Middle row - 2 dots */}
+          <div className="flex gap-1 sm:gap-2">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
+          </div>
+          {/* Bottom row - 3 dots */}
+          <div className="flex gap-1 sm:gap-2">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 md:w-3 md:h-3 bg-gray-800 rounded-full"></div>
+          </div>
         </div>
       );
     case 4:
