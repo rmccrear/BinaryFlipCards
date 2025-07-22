@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calculator, Lightbulb, RefreshCw, RotateCcw, CheckCircle, ArrowDown, ArrowUp } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Calculator, Lightbulb, RefreshCw, RotateCcw, CheckCircle, ArrowDown, ArrowUp, Trophy } from "lucide-react";
 import BinaryCard from "@/components/binary-card";
 import GameControls from "@/components/game-controls";
 import LearningInfo from "@/components/learning-info";
@@ -31,6 +32,7 @@ export default function BinaryGame() {
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
   const [feedbackType, setFeedbackType] = useState<'success' | 'error' | 'warning' | ''>("");
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
 
   const calculateTotal = (): number => {
     let total = 0;
@@ -71,14 +73,8 @@ export default function BinaryGame() {
     const total = calculateTotal();
     
     if (total === gameState.targetNumber) {
-      setFeedbackMessage("Correct! You made the target number!");
-      setFeedbackType("success");
-      setShowFeedback(true);
-      
-      // Auto-generate new target after delay
-      setTimeout(() => {
-        generateNewTarget();
-      }, 2000);
+      setShowSuccessDialog(true);
+      setShowFeedback(false);
     } else if (total > gameState.targetNumber) {
       setFeedbackMessage("Too high! Try flipping some cards face down.");
       setFeedbackType("error");
@@ -90,6 +86,27 @@ export default function BinaryGame() {
     } else {
       setShowFeedback(false);
     }
+  };
+
+  const handleSuccessDialogClose = (): void => {
+    setShowSuccessDialog(false);
+    generateNewTarget();
+  };
+
+  const getBinaryExplanation = (): string => {
+    const activeCards = Object.entries(gameState.cards)
+      .filter(([_, isUp]) => isUp)
+      .map(([value, _]) => parseInt(value))
+      .sort((a, b) => b - a);
+    
+    if (activeCards.length === 0) return "No cards are face up, so the total is 0.";
+    
+    const explanation = activeCards.join(" + ") + " = " + calculateTotal();
+    const binaryRepresentation = [8, 4, 2, 1]
+      .map(value => gameState.cards[value] ? "1" : "0")
+      .join("");
+    
+    return `${explanation}\nBinary representation: ${binaryRepresentation}`;
   };
 
   useEffect(() => {
@@ -185,6 +202,32 @@ export default function BinaryGame() {
         {/* Learning Section */}
         <LearningInfo />
       </div>
+
+      {/* Success Dialog */}
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-green-600">
+              <Trophy className="w-6 h-6" />
+              Correct!
+            </DialogTitle>
+            <DialogDescription className="text-base">
+              You successfully made the target number {gameState.targetNumber}!
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
+            <h4 className="font-semibold text-green-800 mb-2">Explanation:</h4>
+            <p className="text-green-700 whitespace-pre-line">{getBinaryExplanation()}</p>
+          </div>
+          
+          <div className="mt-6 flex justify-center">
+            <Button onClick={handleSuccessDialogClose} className="bg-green-600 hover:bg-green-700">
+              Continue to Next Challenge
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
