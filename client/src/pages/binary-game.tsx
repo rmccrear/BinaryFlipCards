@@ -176,8 +176,20 @@ export default function BinaryGame() {
               ))}
             </div>
 
+            {/* Target Number Status */}
+            <div className="mt-6 text-center">
+              <div className="text-lg font-semibold text-gray-700">
+                Target Number: <span className="text-orange-600">{gameState.targetNumber}</span>
+                {currentTotal !== gameState.targetNumber && currentTotal > 0 && (
+                  <span className={`ml-2 text-sm ${currentTotal > gameState.targetNumber ? 'text-red-500' : 'text-orange-500'}`}>
+                    ({currentTotal > gameState.targetNumber ? 'too high' : 'too low'})
+                  </span>
+                )}
+              </div>
+            </div>
+
             {/* Binary Representation Display */}
-            <div className="mt-8 text-center">
+            <div className="mt-6 text-center">
               <h3 className="text-lg font-semibold text-gray-700 mb-3">Binary Representation</h3>
               <div className="flex justify-center gap-4 flex-wrap">
                 {[8, 4, 2, 1].map((value) => (
