@@ -91,7 +91,7 @@ export default function BinaryCard({ value, isFlipped, onFlip }: BinaryCardProps
       </div>
       
       <p className="text-xs text-gray-500 mt-2">
-        Status: <span className="font-medium">{isFlipped ? 'Face Up' : 'Face Down'}</span>
+        <span className="font-medium">{isFlipped ? 'Face Up' : 'Face Down'}</span>
       </p>
     </div>
   );
