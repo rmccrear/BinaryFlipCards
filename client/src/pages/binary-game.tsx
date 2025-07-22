@@ -46,7 +46,7 @@ export default function BinaryGame() {
 
   const generateNewTarget = (): void => {
     const range = difficultyRanges[gameState.difficulty];
-    const newTarget = Math.floor(Math.random() * (range.max + 1));
+    const newTarget = Math.floor(Math.random() * range.max) + 1;
     setGameState(prev => ({ ...prev, targetNumber: newTarget }));
     setShowFeedback(false);
   };
