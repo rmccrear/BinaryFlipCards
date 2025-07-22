@@ -139,6 +139,16 @@ export default function BinaryGame() {
 
             {/* Cards Container */}
             <div className="flex justify-center items-center gap-6 flex-wrap">
+              {/* Total Display Card */}
+              <div className="text-center">
+                <p className="text-sm font-semibold text-gray-600 mb-2">Total</p>
+                <div className="w-24 h-32 bg-white border-2 border-blue-600 rounded-lg flex items-center justify-center">
+                  <span className="text-3xl font-bold text-blue-600">{currentTotal}</span>
+                </div>
+                <p className="text-xs text-gray-500 mt-2">Current Value</p>
+              </div>
+
+              {/* Binary Cards */}
               {[8, 4, 2, 1].map((value) => (
                 <BinaryCard
                   key={value}
