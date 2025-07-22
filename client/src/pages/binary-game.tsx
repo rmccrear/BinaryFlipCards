@@ -90,6 +90,7 @@ export default function BinaryGame() {
 
   const handleSuccessDialogClose = (): void => {
     setShowSuccessDialog(false);
+    resetCards();
     generateNewTarget();
   };
 
