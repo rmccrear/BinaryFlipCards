@@ -71,8 +71,7 @@ export default function BinaryCard({ value, isFlipped, onFlip }: BinaryCardProps
           )}
         >
           {/* Front Face (Face Down - Blank) */}
-          <div className="absolute inset-0 backface-hidden bg-gray-200 border-2 border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors">
-            <span className="text-gray-500 text-xs font-semibold">Face Down</span>
+          <div className="absolute inset-0 backface-hidden bg-gray-200 border-2 border-gray-300 rounded-lg hover:bg-gray-300 transition-colors">
           </div>
           
           {/* Back Face (Face Up - With Dots) */}
