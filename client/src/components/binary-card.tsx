@@ -71,7 +71,7 @@ export default function BinaryCard({ value, isFlipped, onFlip }: BinaryCardProps
   return (
     <div className="text-center">
       <p className="text-sm font-semibold text-gray-600 mb-2">
-        {value} dots ({getPowerNotation(value)})
+        {value} ({getPowerNotation(value)})
       </p>
       
       <div 
