@@ -229,7 +229,26 @@ export default function BinaryGame() {
           </DialogHeader>
           
           <div className="mt-4 p-4 bg-green-50 rounded-lg border border-green-200">
-            <h4 className="font-semibold text-green-800 mb-2">Explanation:</h4>
+            <h4 className="font-semibold text-green-800 mb-2">Solution:</h4>
+            
+            {/* Miniature Cards Visual */}
+            <div className="flex justify-center gap-2 mb-3">
+              {[8, 4, 2, 1].map((value) => (
+                <div key={value} className="text-center">
+                  <div 
+                    className={`w-8 h-10 rounded border-2 flex items-center justify-center text-xs font-bold transition-colors ${
+                      gameState.cards[value] 
+                        ? 'bg-white border-blue-600 text-blue-600' 
+                        : 'bg-gray-400 border-gray-500 text-gray-600'
+                    }`}
+                  >
+                    {gameState.cards[value] ? value : ''}
+                  </div>
+                  <div className="text-xs text-green-700 mt-1">{value}</div>
+                </div>
+              ))}
+            </div>
+            
             <p className="text-green-700 whitespace-pre-line">{getBinaryExplanation()}</p>
           </div>
           
