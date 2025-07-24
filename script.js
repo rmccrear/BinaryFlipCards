@@ -1,48 +1,50 @@
 // Game state
-let gameState = {
+var gameState = {
     cards: { 8: false, 4: false, 2: false, 1: false },
     targetNumber: 1
 };
 
 // DOM elements
-const targetDisplay = document.getElementById('target-number');
-const totalDisplay = document.getElementById('total-display');
-const newTargetBtn = document.getElementById('new-target-btn');
-const resetCardsBtn = document.getElementById('reset-cards-btn');
-const feedback = document.getElementById('feedback');
-const successModal = document.getElementById('success-modal');
-const continueBtn = document.getElementById('continue-btn');
-const miniCardsContainer = document.getElementById('mini-cards');
-const explanationDiv = document.getElementById('explanation');
+var targetDisplay = document.getElementById('target-number');
+var totalDisplay = document.getElementById('total-display');
+var newTargetBtn = document.getElementById('new-target-btn');
+var resetCardsBtn = document.getElementById('reset-cards-btn');
+var feedback = document.getElementById('feedback');
+var successModal = document.getElementById('success-modal');
+var continueBtn = document.getElementById('continue-btn');
+var miniCardsContainer = document.getElementById('mini-cards');
+var explanationDiv = document.getElementById('explanation');
 
 // Initialize dot patterns
 function createDotPattern(value, containerId) {
-    const container = document.getElementById(containerId);
+    var container = document.getElementById(containerId);
+    var i, dot, row1, row2, row3, grid1, grid2, dot1, dot2;
+    
     container.innerHTML = '';
     
     switch (value) {
         case 8:
             // 3-2-3 pattern
-            const row1 = document.createElement('div');
+            row1 = document.createElement('div');
             row1.className = 'dot-row';
-            for (let i = 0; i < 3; i++) {
-                const dot = document.createElement('div');
+            for (i = 0; i < 3; i++) {
+                dot = document.createElement('div');
                 dot.className = 'dot';
                 row1.appendChild(dot);
             }
             
-            const row2 = document.createElement('div');
+            row2 = document.createElement('div');
             row2.className = 'dot-row';
-            for (let i = 0; i < 2; i++) {
-                const dot = document.createElement('div');
+            for (i = 0; i < 2; i++) {
+                dot = document.createElement('div');
                 dot.className = 'dot';
                 row2.appendChild(dot);
             }
             
-            const row3 = document.createElement('div');
+            row3 = document.createElement('div');
             row3.className = 'dot-row';
-            for (let i = 0; i < 3; i++) {
-                const dot = document.createElement('div');
+            for (i = 0; i < 3; i++) {
+                dot = document.createElement('div');
                 dot.className = 'dot';
                 row3.appendChild(dot);
             }
@@ -54,17 +56,17 @@ function createDotPattern(value, containerId) {
             
         case 4:
             // 2x2 grid
-            const grid1 = document.createElement('div');
+            grid1 = document.createElement('div');
             grid1.className = 'dot-row';
-            const grid2 = document.createElement('div');
+            grid2 = document.createElement('div');
             grid2.className = 'dot-row';
             
-            for (let i = 0; i < 2; i++) {
-                const dot1 = document.createElement('div');
+            for (i = 0; i < 2; i++) {
+                dot1 = document.createElement('div');
                 dot1.className = 'dot';
                 grid1.appendChild(dot1);
                 
-                const dot2 = document.createElement('div');
+                dot2 = document.createElement('div');
                 dot2.className = 'dot';
                 grid2.appendChild(dot2);
             }
@@ -75,8 +77,8 @@ function createDotPattern(value, containerId) {
             
         case 2:
             // Vertical column
-            for (let i = 0; i < 2; i++) {
-                const dot = document.createElement('div');
+            for (i = 0; i < 2; i++) {
+                dot = document.createElement('div');
                 dot.className = 'dot';
                 container.appendChild(dot);
             }
@@ -84,7 +86,7 @@ function createDotPattern(value, containerId) {
             
         case 1:
             // Single dot
-            const dot = document.createElement('div');
+            dot = document.createElement('div');
             dot.className = 'dot';
             container.appendChild(dot);
             break;
@@ -93,32 +95,34 @@ function createDotPattern(value, containerId) {
 
 // Create mini dot pattern for success modal
 function createMiniDotPattern(value) {
-    const container = document.createElement('div');
+    var container = document.createElement('div');
+    var i, dot, row1, row2, row3, grid1, grid2, dot1, dot2;
+    
     container.className = 'mini-dot-pattern';
     
     switch (value) {
         case 8:
             // 3-2-3 pattern
-            const row1 = document.createElement('div');
+            row1 = document.createElement('div');
             row1.className = 'mini-dot-row';
-            for (let i = 0; i < 3; i++) {
-                const dot = document.createElement('div');
+            for (i = 0; i < 3; i++) {
+                dot = document.createElement('div');
                 dot.className = 'mini-dot';
                 row1.appendChild(dot);
             }
             
-            const row2 = document.createElement('div');
+            row2 = document.createElement('div');
             row2.className = 'mini-dot-row';
-            for (let i = 0; i < 2; i++) {
-                const dot = document.createElement('div');
+            for (i = 0; i < 2; i++) {
+                dot = document.createElement('div');
                 dot.className = 'mini-dot';
                 row2.appendChild(dot);
             }
             
-            const row3 = document.createElement('div');
+            row3 = document.createElement('div');
             row3.className = 'mini-dot-row';
-            for (let i = 0; i < 3; i++) {
-                const dot = document.createElement('div');
+            for (i = 0; i < 3; i++) {
+                dot = document.createElement('div');
                 dot.className = 'mini-dot';
                 row3.appendChild(dot);
             }
@@ -130,17 +134,17 @@ function createMiniDotPattern(value) {
             
         case 4:
             // 2x2 grid
-            const grid1 = document.createElement('div');
+            grid1 = document.createElement('div');
             grid1.className = 'mini-dot-row';
-            const grid2 = document.createElement('div');
+            grid2 = document.createElement('div');
             grid2.className = 'mini-dot-row';
             
-            for (let i = 0; i < 2; i++) {
-                const dot1 = document.createElement('div');
+            for (i = 0; i < 2; i++) {
+                dot1 = document.createElement('div');
                 dot1.className = 'mini-dot';
                 grid1.appendChild(dot1);
                 
-                const dot2 = document.createElement('div');
+                dot2 = document.createElement('div');
                 dot2.className = 'mini-dot';
                 grid2.appendChild(dot2);
             }
@@ -151,8 +155,8 @@ function createMiniDotPattern(value) {
             
         case 2:
             // Vertical column
-            for (let i = 0; i < 2; i++) {
-                const dot = document.createElement('div');
+            for (i = 0; i < 2; i++) {
+                dot = document.createElement('div');
                 dot.className = 'mini-dot';
                 container.appendChild(dot);
             }
@@ -160,7 +164,7 @@ function createMiniDotPattern(value) {
             
         case 1:
             // Single dot
-            const dot = document.createElement('div');
+            dot = document.createElement('div');
             dot.className = 'mini-dot';
             container.appendChild(dot);
             break;
@@ -171,9 +175,10 @@ function createMiniDotPattern(value) {
 
 // Calculate total
 function calculateTotal() {
-    let total = 0;
-    for (const [value, isUp] of Object.entries(gameState.cards)) {
-        if (isUp) {
+    var total = 0;
+    var value;
+    for (value in gameState.cards) {
+        if (gameState.cards[value]) {
             total += parseInt(value);
         }
     }
@@ -187,7 +192,7 @@ function updateTotalDisplay() {
 
 // Generate new target (1-15, covering all possible binary combinations)
 function generateNewTarget() {
-    const newTarget = Math.floor(Math.random() * 15) + 1;
+    var newTarget = Math.floor(Math.random() * 15) + 1;
     gameState.targetNumber = newTarget;
     targetDisplay.textContent = newTarget;
     hideFeedback();
@@ -195,9 +200,10 @@ function generateNewTarget() {
 
 // Reset all cards to face down
 function resetCards() {
-    for (const value in gameState.cards) {
+    var value, card;
+    for (value in gameState.cards) {
         gameState.cards[value] = false;
-        const card = document.querySelector(`.binary-card[data-value="${value}"]`);
+        card = document.querySelector('.binary-card[data-value="' + value + '"]');
         card.classList.add('face-down');
     }
     updateTotalDisplay();
@@ -206,8 +212,9 @@ function resetCards() {
 
 // Flip card
 function flipCard(value) {
+    var card;
     gameState.cards[value] = !gameState.cards[value];
-    const card = document.querySelector(`.binary-card[data-value="${value}"]`);
+    card = document.querySelector('.binary-card[data-value="' + value + '"]');
     
     if (gameState.cards[value]) {
         card.classList.remove('face-down');
@@ -222,7 +229,7 @@ function flipCard(value) {
 // Show feedback
 function showFeedback(message, type) {
     feedback.textContent = message;
-    feedback.className = `feedback ${type}`;
+    feedback.className = 'feedback ' + type;
     feedback.classList.remove('hidden');
 }
 
@@ -233,7 +240,7 @@ function hideFeedback() {
 
 // Check win condition
 function checkWinCondition() {
-    const total = calculateTotal();
+    var total = calculateTotal();
     
     if (total === gameState.targetNumber) {
         showSuccessModal();
@@ -249,18 +256,25 @@ function checkWinCondition() {
 
 // Show success modal
 function showSuccessModal() {
+    var values = [8, 4, 2, 1];
+    var i, value, miniCard, label, content;
+    var activeCards = [];
+    var explanation = '';
+    var mathExpression, binaryRepresentation;
+    
     // Create mini cards visualization
     miniCardsContainer.innerHTML = '';
     
-    [8, 4, 2, 1].forEach(value => {
-        const miniCard = document.createElement('div');
-        miniCard.className = `mini-card ${gameState.cards[value] ? 'face-up' : 'face-down'}`;
+    for (i = 0; i < values.length; i++) {
+        value = values[i];
+        miniCard = document.createElement('div');
+        miniCard.className = 'mini-card ' + (gameState.cards[value] ? 'face-up' : 'face-down');
         
-        const label = document.createElement('div');
+        label = document.createElement('div');
         label.className = 'mini-card-label';
         label.textContent = value;
         
-        const content = document.createElement('div');
+        content = document.createElement('div');
         content.className = 'mini-card-content';
         
         if (gameState.cards[value]) {
@@ -270,24 +284,26 @@ function showSuccessModal() {
         miniCard.appendChild(label);
         miniCard.appendChild(content);
         miniCardsContainer.appendChild(miniCard);
-    });
+    }
     
     // Create explanation
-    const activeCards = Object.entries(gameState.cards)
-        .filter(([_, isUp]) => isUp)
-        .map(([value, _]) => parseInt(value))
-        .sort((a, b) => b - a);
+    for (value in gameState.cards) {
+        if (gameState.cards[value]) {
+            activeCards.push(parseInt(value));
+        }
+    }
+    activeCards.sort(function(a, b) { return b - a; });
     
-    let explanation = '';
     if (activeCards.length === 0) {
         explanation = "No cards are face up, so the total is 0.";
     } else {
-        const mathExpression = activeCards.join(" + ") + " = " + calculateTotal();
-        const binaryRepresentation = [8, 4, 2, 1]
-            .map(value => gameState.cards[value] ? "1" : "0")
-            .join("");
+        mathExpression = activeCards.join(" + ") + " = " + calculateTotal();
+        binaryRepresentation = '';
+        for (i = 0; i < values.length; i++) {
+            binaryRepresentation += gameState.cards[values[i]] ? "1" : "0";
+        }
         
-        explanation = `${mathExpression}\nBinary representation: ${binaryRepresentation}`;
+        explanation = mathExpression + "\nBinary representation: " + binaryRepresentation;
     }
     
     explanationDiv.textContent = explanation;
@@ -303,6 +319,8 @@ function hideSuccessModal() {
 
 // Initialize the game
 function initGame() {
+    var cards, i, card, value;
+    
     // Create dot patterns
     createDotPattern(8, 'dots-8');
     createDotPattern(4, 'dots-4');
@@ -314,19 +332,23 @@ function initGame() {
     generateNewTarget();
     
     // Add event listeners
-    document.querySelectorAll('.binary-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const value = parseInt(card.dataset.value);
-            flipCard(value);
-        });
-    });
+    cards = document.querySelectorAll('.binary-card');
+    for (i = 0; i < cards.length; i++) {
+        card = cards[i];
+        value = parseInt(card.getAttribute('data-value'));
+        card.addEventListener('click', function(val) {
+            return function() {
+                flipCard(val);
+            };
+        }(value));
+    }
     
     newTargetBtn.addEventListener('click', generateNewTarget);
     resetCardsBtn.addEventListener('click', resetCards);
     continueBtn.addEventListener('click', hideSuccessModal);
     
     // Close modal when clicking outside
-    successModal.addEventListener('click', (e) => {
+    successModal.addEventListener('click', function(e) {
         if (e.target === successModal) {
             hideSuccessModal();
         }
