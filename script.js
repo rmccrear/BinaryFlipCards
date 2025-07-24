@@ -1,7 +1,8 @@
 // Game state
 var gameState = {
     cards: { 8: false, 4: false, 2: false, 1: false },
-    targetNumber: 1
+    targetNumber: 1,
+    lastTargetNumber: null
 };
 
 // DOM elements
@@ -192,7 +193,14 @@ function updateTotalDisplay() {
 
 // Generate new target (1-15, covering all possible binary combinations)
 function generateNewTarget() {
-    var newTarget = Math.floor(Math.random() * 15) + 1;
+    var newTarget;
+    
+    // Keep generating until we get a different number than the last one
+    do {
+        newTarget = Math.floor(Math.random() * 15) + 1;
+    } while (newTarget === gameState.lastTargetNumber);
+    
+    gameState.lastTargetNumber = gameState.targetNumber;
     gameState.targetNumber = newTarget;
     targetDisplay.textContent = newTarget;
     hideFeedback();
