@@ -33,7 +33,7 @@ jobs:
         run: npm install
 
       - name: Build Vite Project
-        run: npm run build
+        run: VITE_BASE_PATH=/BinaryFlipCards/  npm run build
 
       - name: List Build Output
         run: ls -la ./dist/public
