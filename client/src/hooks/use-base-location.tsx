@@ -1,27 +1,22 @@
-import { useLocation } from "wouter";
+import { useBrowserLocation } from "wouter/use-browser-location";
 import type { BaseLocationHook } from "wouter";
 
+const base = import.meta.env.VITE_BASE_PATH || "/BinaryFlipCards/";
+
 const useBasePathLocation: BaseLocationHook = () => {
-  const base = import.meta.env.VITE_BASE_PATH || "/";
-  const [location, setLocationRaw] = useLocation();
+  const [location, setLocation] = useBrowserLocation();
 
-  // Strip the base from the current location
-  const stripBase = (path: string) => {
-    if (path.startsWith(base)) {
-      return path.slice(base.length - 1) || "/";
-    }
-    return path;
-  };
+  const stripBase = (path: string): string =>
+    path.startsWith(base) ? path.slice(base.length - 1) || "/" : path;
 
-  // Prefix with base, avoid triggering same path
-  const setLocation = (to: string, ...args: any[]) => {
-    const prefixed = `${base}${to.replace(/^\/+/, "")}`;
-    if (location !== prefixed) {
-      setLocationRaw(prefixed, ...args);
+  const setWithBase = (to: string, ...args: any[]) => {
+    const normalized = `${base}${to.replace(/^\/+/, "")}`;
+    if (location !== normalized) {
+      setLocation(normalized, ...args);
     }
   };
 
-  return [stripBase(location), setLocation];
+  return [stripBase(location), setWithBase];
 };
 
 export default useBasePathLocation;
