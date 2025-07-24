@@ -6,29 +6,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import BinaryGame from "@/pages/binary-game";
 
-import { Router as WouterRouter, useLocation as useWouterLocation } from "wouter";
+import { Router as WouterRouter } from "wouter";
 
-type BaseLocationHook = () => [string, (path: string, ...args: any[]) => any];
-
-// Type hint: return a tuple [string, function]
-const useBasePathLocation = (): [string, (to: string) => void] => {
-  const base = import.meta.env.VITE_BASE_PATH || "/";
-  const [location, setLocationRaw] = useWouterLocation();
-
-  const setLocation = (to: string) => {
-    // Avoid double slashes
-    const normalized = to.startsWith("/") ? to.slice(1) : to;
-    setLocationRaw(`${base}${normalized}`);
-  };
-
-  const stripBase = (path: string) => {
-    return path.startsWith(base) ? path.slice(base.length - 1) : path;
-  };
-
-  return [stripBase(location), setLocation];
-};
-
-
+import useBasePathLocation from "@/hooks/use-base-location";
 
 function Router() {
   return (
