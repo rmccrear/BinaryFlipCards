@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Number Cards Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="header">
+            <h1>Binary Number Cards Game</h1>
+            <p>Flip cards to match the target number!</p>
+        </header>
+
+        <div class="game-controls">
+            <div class="difficulty-selector">
+                <label for="difficulty">Difficulty:</label>
+                <select id="difficulty">
+                    <option value="beginner">Beginner (1-3)</option>
+                    <option value="intermediate">Intermediate (1-7)</option>
+                    <option value="advanced">Advanced (1-15)</option>
+                </select>
+            </div>
+            <div class="target-display">
+                <h2>Target: <span id="target-number">1</span></h2>
+            </div>
+            <button id="new-target-btn" class="btn">New Target</button>
+            <button id="reset-cards-btn" class="btn">Reset Cards</button>
+        </div>
+
+        <div class="cards-container">
+            <!-- Total card on the left -->
+            <div class="total-card">
+                <div class="card-label">Total</div>
+                <div class="card-content">
+                    <span id="total-display">0</span>
+                </div>
+            </div>
+
+            <!-- Binary cards -->
+            <div class="binary-card" data-value="8">
+                <div class="card-label">8 (2³)</div>
+                <div class="card-content">
+                    <div class="dot-pattern" id="dots-8"></div>
+                </div>
+            </div>
+
+            <div class="binary-card" data-value="4">
+                <div class="card-label">4 (2²)</div>
+                <div class="card-content">
+                    <div class="dot-pattern" id="dots-4"></div>
+                </div>
+            </div>
+
+            <div class="binary-card" data-value="2">
+                <div class="card-label">2 (2¹)</div>
+                <div class="card-content">
+                    <div class="dot-pattern" id="dots-2"></div>
+                </div>
+            </div>
+
+            <div class="binary-card" data-value="1">
+                <div class="card-label">1 (2⁰)</div>
+                <div class="card-content">
+                    <div class="dot-pattern" id="dots-1"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="feedback" class="feedback hidden"></div>
+
+        <div class="learning-info">
+            <h3>How to Play:</h3>
+            <p>Click the binary cards to flip them face up or down. When face up, they show their value in dots. Add up the face-up cards to match the target number!</p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>🎉 Correct!</h2>
+            <p>You matched the target number!</p>
+            
+            <div class="solution-section">
+                <h4>Solution:</h4>
+                <div class="mini-cards" id="mini-cards"></div>
+                <div class="explanation" id="explanation"></div>
+            </div>
+            
+            <button id="continue-btn" class="btn btn-primary">Continue</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

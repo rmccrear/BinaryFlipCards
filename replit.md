@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a full-stack web application built as an interactive binary number learning game. The application teaches users how binary numbers work through a card-flipping game where players match decimal target numbers by selecting the correct combination of binary place values (powers of 2).
+This is a simplified vanilla JavaScript web application built as an interactive binary number learning game. The application teaches users how binary numbers work through a card-flipping game where players match decimal target numbers by selecting the correct combination of binary place values (powers of 2).
 
 ## User Preferences
 
@@ -11,89 +11,82 @@ Preferred communication style: Simple, everyday language.
 ## System Architecture
 
 ### Frontend Architecture
-- **Framework**: React 18 with TypeScript
-- **Routing**: Wouter for lightweight client-side routing
-- **Styling**: Tailwind CSS with shadcn/ui component library
-- **State Management**: React hooks (useState, useEffect) for local component state
-- **Build Tool**: Vite for development and production builds
+- **Framework**: Vanilla JavaScript (no frameworks)
+- **Styling**: Pure CSS with responsive design
+- **State Management**: Plain JavaScript objects and DOM manipulation
+- **Build Tool**: None required - direct HTML/CSS/JS files
 
 ### Backend Architecture
-- **Framework**: Express.js with TypeScript
+- **Framework**: Express.js for static file serving only
 - **Runtime**: Node.js with ES modules
-- **API Pattern**: RESTful API structure (routes prefixed with /api)
-- **Development Setup**: Hot reload with Vite integration in development mode
+- **Purpose**: Simple static file server (no API endpoints)
+- **Development Setup**: Direct file serving without build process
 
 ### Data Storage Solutions
-- **ORM**: Drizzle ORM for type-safe database operations
-- **Database**: PostgreSQL (configured for Neon Database)
-- **Schema**: Centralized schema definition in shared directory
-- **Migrations**: Drizzle Kit for database migrations
-- **Development Storage**: In-memory storage implementation for development/testing
+- **Storage**: No database required - all game state is client-side
+- **Persistence**: Game state resets with each session (educational focus)
+- **State Management**: JavaScript objects stored in memory
 
 ## Key Components
 
 ### Game Logic Components
-- **BinaryCard**: Interactive cards representing binary place values (8, 4, 2, 1)
-- **GameControls**: Difficulty selection, target generation, and game state management
-- **LearningInfo**: Educational content explaining binary number concepts
+- **Binary Cards**: Interactive DOM elements representing binary place values (8, 4, 2, 1)
+- **Game Controls**: HTML form elements for difficulty selection and target generation
+- **Success Modal**: Pure CSS modal with dot pattern visualization
+- **Learning Info**: Static educational content
 
-### UI Framework
-- **shadcn/ui**: Comprehensive React component library built on Radix UI
-- **Responsive Design**: Mobile-first approach with Tailwind CSS
-- **Dark Mode Support**: Built-in theme switching capability
+### UI Implementation
+- **CSS Grid/Flexbox**: Responsive layout without frameworks
+- **DOM Manipulation**: Direct JavaScript event handling and state updates
+- **CSS Animations**: Smooth transitions and hover effects
+- **Mobile-First Design**: Responsive breakpoints for all screen sizes
 
-### Development Tools
-- **TypeScript**: Full type safety across client, server, and shared code
-- **Path Aliases**: Simplified imports using @ prefixes for clean code organization
-- **ESBuild**: Production bundling for server-side code
+### Development Approach
+- **Pure JavaScript**: No transpilation or build steps required
+- **Semantic HTML**: Accessible markup structure
+- **Progressive Enhancement**: Works without JavaScript for basic content
 
 ## Data Flow
 
 1. **Game Initialization**: User selects difficulty level (beginner/intermediate/advanced)
-2. **Target Generation**: Random decimal number generated based on difficulty range
-3. **User Interaction**: Player flips binary cards to create combinations
-4. **Real-time Validation**: Current total calculated and compared to target
+2. **Target Generation**: Random decimal number generated based on difficulty range (1-3, 1-7, 1-15)
+3. **User Interaction**: Player clicks binary cards to flip between face-up/face-down states
+4. **Real-time Validation**: Current total calculated via DOM manipulation and compared to target
 5. **Feedback System**: Visual and textual feedback for correct/incorrect attempts
-6. **Score Tracking**: Game state maintains score and progress
+6. **Success Flow**: Modal popup shows solution with mini-cards and mathematical explanation
+7. **Reset Flow**: Cards automatically reset to face-down state after each successful solution
 
-### Database Schema
-- **Users Table**: Basic user authentication structure (id, username, password)
-- **Extensible Design**: Schema ready for additional game features like score tracking, progress saving
+## File Structure
 
-## External Dependencies
+### Core Files
+- **index.html**: Main HTML structure with semantic markup
+- **styles.css**: Complete CSS styling with responsive design and animations
+- **script.js**: Game logic, DOM manipulation, and event handling
 
-### Core Framework Dependencies
-- **@tanstack/react-query**: Server state management and caching
-- **@radix-ui/***: Headless UI primitives for accessible components
-- **@hookform/resolvers**: Form validation integration
-- **class-variance-authority**: Type-safe CSS class variants
-
-### Database & ORM
-- **@neondatabase/serverless**: PostgreSQL client for serverless environments
-- **drizzle-orm**: Type-safe SQL query builder
-- **drizzle-zod**: Schema validation integration
-
-### Development Dependencies
-- **Replit Integration**: Custom plugins for Replit development environment
-- **Error Handling**: Runtime error overlay for development debugging
+### Key Features
+- **No Build Process**: Direct file serving without compilation
+- **No Dependencies**: Pure HTML/CSS/JavaScript implementation
+- **Client-Side Only**: All game logic runs in the browser
+- **Educational Focus**: Immediate visual feedback and mathematical explanations
 
 ## Deployment Strategy
 
-### Build Process
-1. **Client Build**: Vite builds React application to `dist/public`
-2. **Server Build**: ESBuild bundles Express server to `dist/index.js`
-3. **Production Mode**: Single command starts the production server
+### Simplified Deployment
+- **Static File Serving**: Express.js serves HTML/CSS/JS files directly
+- **No Build Step**: Files are served as-is from the file system
+- **Single Port**: All content served on port 5000
+- **Instant Deployment**: No compilation or bundling required
 
 ### Environment Configuration
-- **Development**: Hot reload with Vite dev server proxy
-- **Production**: Static file serving with Express
-- **Database**: Environment-based database URL configuration
-- **Session Management**: PostgreSQL session store for user authentication
+- **Development**: Direct file serving with auto-restart
+- **Production**: Same setup - static file serving
+- **No Database**: No external dependencies or configuration needed
+- **No Session Management**: Stateless game sessions
 
-### Hosting Considerations
-- **Static Assets**: Client files served from Express in production
-- **API Routes**: All backend routes prefixed with `/api` for clear separation
-- **Database**: Designed for cloud PostgreSQL providers like Neon
-- **Session Storage**: Uses connect-pg-simple for PostgreSQL-backed sessions
+### Hosting Simplicity
+- **Static Assets**: All files served directly from root directory
+- **No API Routes**: Pure frontend application
+- **No External Services**: Self-contained educational game
+- **Zero Configuration**: Works immediately after file deployment
 
-The application follows a modern full-stack architecture with clear separation between client and server code, shared TypeScript definitions, and a scalable database design ready for feature expansion.
+The application follows a simplified architecture focused on educational effectiveness with minimal technical complexity, making it easy to understand, modify, and deploy.
