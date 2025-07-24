@@ -38,21 +38,4 @@ jobs:
       - name: List Build Output
         run: ls -la ./dist/public
 
-      - name: Upload Production Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist/public
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
+      - name: Upload Product
