@@ -1,21 +1,12 @@
 // Game state
 let gameState = {
     cards: { 8: false, 4: false, 2: false, 1: false },
-    targetNumber: 1,
-    difficulty: 'beginner'
-};
-
-// Difficulty ranges
-const difficultyRanges = {
-    beginner: { max: 3 },
-    intermediate: { max: 7 },
-    advanced: { max: 15 }
+    targetNumber: 1
 };
 
 // DOM elements
 const targetDisplay = document.getElementById('target-number');
 const totalDisplay = document.getElementById('total-display');
-const difficultySelect = document.getElementById('difficulty');
 const newTargetBtn = document.getElementById('new-target-btn');
 const resetCardsBtn = document.getElementById('reset-cards-btn');
 const feedback = document.getElementById('feedback');
@@ -194,10 +185,9 @@ function updateTotalDisplay() {
     totalDisplay.textContent = calculateTotal();
 }
 
-// Generate new target
+// Generate new target (1-15, covering all possible binary combinations)
 function generateNewTarget() {
-    const range = difficultyRanges[gameState.difficulty];
-    const newTarget = Math.floor(Math.random() * range.max) + 1;
+    const newTarget = Math.floor(Math.random() * 15) + 1;
     gameState.targetNumber = newTarget;
     targetDisplay.textContent = newTarget;
     hideFeedback();
@@ -329,11 +319,6 @@ function initGame() {
             const value = parseInt(card.dataset.value);
             flipCard(value);
         });
-    });
-    
-    difficultySelect.addEventListener('change', (e) => {
-        gameState.difficulty = e.target.value;
-        generateNewTarget();
     });
     
     newTargetBtn.addEventListener('click', generateNewTarget);
