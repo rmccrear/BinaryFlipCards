@@ -254,7 +254,9 @@ function checkWinCondition() {
         showSuccessModal();
         hideFeedback();
     } else if (total > gameState.targetNumber) {
-        showFeedback("Too high! Try flipping some cards face down.", "error");
+        showFeedback("Too high", "error");
+    } else if (total > 0) {
+        showFeedback("Too low", "warning");
     } else {
         hideFeedback();
     }
